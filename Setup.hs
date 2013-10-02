@@ -6,7 +6,7 @@ import System.Posix.Files
 
 main = do
   linkDotfiles
-  -- linkBinFolder
+  linkBinFolder
 
 linkBinFolder :: IO ()
 linkBinFolder = do
@@ -15,12 +15,12 @@ linkBinFolder = do
   linked <- linkNX bin (home </> "bin")
   if linked
     then putStrLn "Linking ./bin to ~/bin"
-    else return ()
+    else putStrLn "~/bin already exists"
 
 -- link if not already linked. returns bool for success
 linkNX :: FilePath -> FilePath -> IO Bool
 linkNX source destination = do
-  fileExists <- doesFileExist destination
+  fileExists <- fileExist destination
   if fileExists
     then return False
     else do
@@ -40,7 +40,7 @@ linkDotfile home dotfile = do
       realLocation = "./dotfiles" </> dotfile
   putStr ("Linking " ++ realLocation ++ " to " ++ takeFileName homeLocation ++ "... ")
   symlinkExists <- do
-    fileExists <- doesFileExist homeLocation
+    fileExists <- fileExist homeLocation
     if fileExists
       then do
         status <- getSymbolicLinkStatus homeLocation
