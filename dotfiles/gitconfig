@@ -1,0 +1,21 @@
+[user]
+	name = Ian Duncan
+	email = ian.duncan@logos.com
+[credential]
+  helper = osxkeychain
+[core]
+  excludesfile = .gitignore_global
+[color]
+  ui = true
+  diff = auto
+  status = auto
+  branch = auto
+[diff]
+  algorithm = patience
+[help]
+  autocorrect = 1
+[mergetool]
+	keepBackup = true
+[push]
+  default = tracking
+
